@@ -80,7 +80,7 @@ class MongoCacheStorage(object):
         self.db = self.conn[self.mongo_db]
         if self.mongo_user and self.mongo_pwd and self.mongo_mechanism:
             self.db.authenticate(name=self.mongo_user, password=self.mongo_pwd, mechanism=self.mongo_mechanism)
-        self.collection = self.db[self.collection]
+        # self.collection = self.db[self.collection]
 
     def close_spider(self, spider):
         self.conn.close()
@@ -88,7 +88,11 @@ class MongoCacheStorage(object):
 
     def retrieve_response(self, spider, request):
         key = request_fingerprint(request)
-        value = self.collection.find_one({"_id": key})
+        collection_index = int(key, 16) % 1000
+        collection_name = 'collection' + str(collection_index)
+        collection = self.db[collection_name]
+        print "-----------------Read cache from %s------------------" % collection_name 
+        value = collection.find_one({"_id": key})
         if not value:
             return
         stored_data = value["value"]
@@ -127,8 +131,14 @@ class MongoCacheStorage(object):
             'request_body': request_body,
         }
         #print stored_data
+
+        collection_index = int(key, 16) % 1000
+        collection_name = 'collection' + str(collection_index)
+        collection = self.db[collection_name]
+
         try:
-            self.collection.insert({"_id": key, "value": stored_data})
+            collection.insert({"_id": key, "value": stored_data})
+            print "-----------------Write cache %s------------------" % collection_name
         except Exception, e:
             print e.message
             pass
