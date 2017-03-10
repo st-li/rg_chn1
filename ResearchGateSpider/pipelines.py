@@ -25,7 +25,7 @@ class MongoDBPipeline(object):
             settings.mongodb_port
         )
         self.db = self.client[settings.mongodb_db]
-        db.authenticate(name=settings.mongodb_user, password=settings.mongodb_pwd, mechanism=settings.mongodb_mechanism)
+        self.db.authenticate(name=settings.mongodb_user, password=settings.mongodb_pwd, mechanism=settings.mongodb_mechanism)
         # self.collection = db[settings.mongodb_collection]
 
     def process_item(self, item, spider):
