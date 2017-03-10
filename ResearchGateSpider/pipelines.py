@@ -25,6 +25,8 @@ class MongoDBPipeline(object):
             settings.mongodb_port
         )
         self.db = self.client[settings.mongodb_db]
+        print "*************************"
+        print "The database is " + settings.mongodb_db
         self.db.authenticate(name=settings.mongodb_user, password=settings.mongodb_pwd, mechanism=settings.mongodb_mechanism)
         # self.collection = db[settings.mongodb_collection]
 
@@ -37,6 +39,7 @@ class MongoDBPipeline(object):
         if valid:
             if isinstance(item, RGPersonItem):
                 collection = self.db[settings.mongodb_person_collection]
+                print "The colleciton is "+ settings.mongodb_person_collection
                 if collection.find_one({"_id" : item["person_key"]}):
                     print "This person's infomation is already in MongoDB \n"
                 else:
@@ -58,6 +61,8 @@ class MongoDBPipeline(object):
                         "country" : item["country"]
                         }
                     )
+
+
             elif isinstance(item, RGArticleItem):
                 collection = self.db[settings.mongodb_article_collection]
                 if collection.find_one({"_id" : item["article_key"]}):
@@ -69,7 +74,7 @@ class MongoDBPipeline(object):
                     (
                         {
                         "_id": item["article_key"], 
-                        "person_key":article_info['author_key'],
+                        "person_key":item['author_key'],
                         "article_name":article_info["article_name"],
                         "article_abstract":article_info['article_abstract'], 
                         "article_journal":article_info['article_journal']
