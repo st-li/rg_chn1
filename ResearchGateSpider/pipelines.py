@@ -80,25 +80,25 @@ class MongoDBPipeline(object):
                     print "***********************************"
                     print "The country is "
                     print item['country']
-                    collection.insert
-                    (
-                        {
-                        "_id": item["person_key"], 
-                        "fullname" : item["fullname"],
-                        "target_sciences" : item["target_sciences"],
-                        "title" : item["title"],
-                        "score" : item["score"],
-                        "co_authors" : item["co_authors"],
-                        "skills" : item["skills"],
-                        "topics" : item["topics"],
-                        "institution" : item["institution"],
-                        "department" : item["department"],
-                        "city" : item["city"],
-                        "province" : item["province"],
-                        "country" : item["country"]
-                        }
-                    )
-
+                    # collection.insert
+                    # (
+                    #     {
+                    #     "_id": item["person_key"], 
+                    #     "fullname" : item["fullname"],
+                    #     "target_sciences" : item["target_sciences"],
+                    #     "title" : item["title"],
+                    #     "score" : item["score"],
+                    #     "co_authors" : item["co_authors"],
+                    #     "skills" : item["skills"],
+                    #     "topics" : item["topics"],
+                    #     "institution" : item["institution"],
+                    #     "department" : item["department"],
+                    #     "city" : item["city"],
+                    #     "province" : item["province"],
+                    #     "country" : item["country"]
+                    #     }
+                    # )
+                    collection.insert({"_id": item["person_key"], "value" : dict(item)})
 
             elif isinstance(item, RGArticleItem):
                 collection = self.db[settings.mongodb_article_collection]
