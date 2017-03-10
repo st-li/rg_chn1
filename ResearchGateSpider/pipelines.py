@@ -25,8 +25,6 @@ class MongoDBPipeline(object):
             settings.mongodb_port
         )
         self.db = self.client[settings.mongodb_db]
-        print "*************************"
-        print "The database is " + settings.mongodb_db
         self.db.authenticate(name=settings.mongodb_user, password=settings.mongodb_pwd, mechanism=settings.mongodb_mechanism)
         # self.collection = db[settings.mongodb_collection]
 
@@ -43,6 +41,45 @@ class MongoDBPipeline(object):
                 if collection.find_one({"_id" : item["person_key"]}):
                     print "This person's infomation is already in MongoDB \n"
                 else:
+                    print "***********************************"
+                    print "The id is "
+                    print item['person_key']
+                    print "***********************************"
+                    print "The fullname is "
+                    print item['fullname']
+                    print "***********************************"
+                    print "The target_sciences is "
+                    print item['target_sciences']
+                    print "***********************************"
+                    print "The title is "
+                    print item['title']
+                    print "***********************************"
+                    print "The score is "
+                    print item['score']
+                    print "***********************************"
+                    print "The co_authors is "
+                    print item['co_authors']
+                    print "***********************************"
+                    print "The skills is "
+                    print item['skills']
+                    print "***********************************"
+                    print "The topics is "
+                    print item['topics']
+                    print "***********************************"
+                    print "The institution is "
+                    print item['institution']
+                    print "***********************************"
+                    print "The department is "
+                    print item['department']
+                    print "***********************************"
+                    print "The city is "
+                    print item['city']
+                    print "***********************************"
+                    print "The province is "
+                    print item['province']
+                    print "***********************************"
+                    print "The country is "
+                    print item['country']
                     collection.insert
                     (
                         {
@@ -69,7 +106,6 @@ class MongoDBPipeline(object):
                     print "This article is already in MongoDB \n"
                 else:
                     article_info = item['article']
-
                     collection.insert
                     (
                         {
