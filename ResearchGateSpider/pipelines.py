@@ -41,46 +41,47 @@ class MongoDBPipeline(object):
                 if collection.find_one({"_id" : item["person_key"]}):
                     print "This person's infomation is already in MongoDB \n"
                 else:
-                    collection.insert_one
-                    (
-                        {
-                            "_id": item["person_key"], 
-                            value:{
-                                "fullname" : item["fullname"],
-                                "target_sciences" : item["target_sciences"],
-                                "title" : item["title"],
-                                "score" : item["score"],
-                                "co_authors" : item["co_authors"],
-                                "skills" : item["skills"],
-                                "topics" : item["topics"],
-                                "institution" : item["institution"],
-                                "department" : item["department"],
-                                "city" : item["city"],
-                                "province" : item["province"],
-                                "country" : item["country"]
-                            }
-                        }
-                    )
-                    # collection.insert({"_id": item["person_key"], "value" : dict(item)})
+                    # collection.insert_one
+                    # (
+                    #     {
+                    #         "_id": item["person_key"], 
+                    #         value:{
+                    #             "fullname" : item["fullname"],
+                    #             "target_sciences" : item["target_sciences"],
+                    #             "title" : item["title"],
+                    #             "score" : item["score"],
+                    #             "co_authors" : item["co_authors"],
+                    #             "skills" : item["skills"],
+                    #             "topics" : item["topics"],
+                    #             "institution" : item["institution"],
+                    #             "department" : item["department"],
+                    #             "city" : item["city"],
+                    #             "province" : item["province"],
+                    #             "country" : item["country"]
+                    #         }
+                    #     }
+                    # )
+                    collection.insert({"_id": item["person_key"], "value" : dict(item)})
 
             elif isinstance(item, RGArticleItem):
                 collection = self.db[settings.mongodb_article_collection]
                 if collection.find_one({"_id" : item["article_key"]}):
                     print "This article is already in MongoDB \n"
                 else:
-                    article_info = item['article']
-                    collection.insert_one
-                    (
-                        {
-                            "_id": item["article_key"], 
-                            value:{
-                                "person_key":item['author_key'],
-                                "article_name":article_info["article_name"],
-                                "article_abstract":article_info['article_abstract'], 
-                                "article_journal":article_info['article_journal']
-                            }
-                        }
-                    )
+                    # article_info = item['article']
+                    # collection.insert_one
+                    # (
+                    #     {
+                    #         "_id": item["article_key"], 
+                    #         value:{
+                    #             "person_key":item['author_key'],
+                    #             "article_name":article_info["article_name"],
+                    #             "article_abstract":article_info['article_abstract'], 
+                    #             "article_journal":article_info['article_journal']
+                    #         }
+                    #     }
+                    # )
+                    collection.insert({"_id": item["article_key"], "value" : dict(item)})
             # if self.collection.find_one({"_id" : item["person_key"]}):
             #     print "item is already in MongoDB \n"
             # else:
