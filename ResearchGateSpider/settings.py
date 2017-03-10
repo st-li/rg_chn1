@@ -13,7 +13,7 @@ BOT_NAME = 'ResearchGateSpider'
 
 SPIDER_MODULES = ['ResearchGateSpider.spiders']
 NEWSPIDER_MODULE = 'ResearchGateSpider.spiders'
-DOWNLOAD_TIMEOUT=20
+DOWNLOAD_TIMEOUT=120
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ResearchGateSpider (+http://www.yourdomain.com)'
