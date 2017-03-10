@@ -46,7 +46,9 @@ class MongoDBPipeline(object):
                 if collection.find_one({"_id" : item["article_key"]}):
                     print "This article is already in MongoDB \n"
                 else:
-                    collection.insert({"_id": item["article_key"], "value" : dict(item)})
+                    article_info = item['article']
+
+                    collection.insert({"_id": item["article_key"], "article_name":article_info["article_name"], "article_abstract":article_info['article_abstract'], "article_journal":article_info['article_journal']})
             # if self.collection.find_one({"_id" : item["person_key"]}):
             #     print "item is already in MongoDB \n"
             # else:

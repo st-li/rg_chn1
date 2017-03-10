@@ -116,7 +116,7 @@ class RGSpider1(CrawlSpider):
         article_name = DataFilter.simple_format(response.xpath('//div[@class="publication-header"]//h1[@class="publication-title"]/text()').extract())
         article_item['article_name'] = article_name
         article_abstract = DataFilter.simple_format(response.xpath('//div[@class="publication-abstract"]/div[2]').extract())
-        article_item['artical_abstract'] = article_abstract
+        article_item['article_abstract'] = article_abstract
         article_journal = DataFilter.simple_format(response.xpath('//span[@class="publication-meta-journal"]/a').extract())
         article_date = DataFilter.simple_format(response.xpath('//span[@class="publication-meta-date"]').extract())
         article_item['article_journal'] = article_journal + ", " + article_date
